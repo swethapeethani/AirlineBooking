@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Available Flights</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <b><p th:text="'Flight Search Results'"/></b>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Flight Id</th>
+            <th>Source</th>
+            <th>Destination</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="flight : ${searchResults}">
+            <td th:text="${flight.flightNumber}"/>
+            <td th:text="${flight.flightInformation.source}"/>
+            <td th:text="${flight.flightInformation.destination}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
