@@ -19,7 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by rajashrk on 8/8/17.
@@ -47,7 +49,8 @@ public class FlightController {
         CityRepository cityRepository = new CityRepository();
         List<City> cities = cityRepository.getCities();
         model.addAttribute("cities", cities);
-        model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1, LocalDate.of(2017,9,5)));
+        //model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1, java.util.Optional.of(LocalDate.of(2017, Month.SEPTEMBER, 5))));
+        model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1, Optional.of(LocalDate.of(2017, Month.SEPTEMBER, 6))));
         //System.out.println(searchCriteria.getSource());
         return "flightSearch";
 

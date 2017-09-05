@@ -27,7 +27,8 @@
             </option>
         </select>
         <input type="number" min="1" th:field="*{numberOfPassengers}"/>
-        <input type="date" id="start_date" th:field="*{date}"/>
+        <input type="date" name="dateString" id="date" th:field="*{dateString}"/>
+
         <input type="submit" value="Submit"/>
     </div>
 </form>
