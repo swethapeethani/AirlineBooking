@@ -53,6 +53,10 @@ public class SearchCriteria {
         return dateString;
     }
 
+    public void setDateString(String dateString){
+        this.dateString =dateString;
+    }
+
     public void setDate(String dateString) {
         if(dateString == null || dateString.isEmpty()) {
             this.date = null;
@@ -71,7 +75,7 @@ public class SearchCriteria {
 
     public Optional<LocalDate> getParsedDate()
     {
-        return this.date;
+        return this.date = Optional.of(LocalDate.parse(this.dateString));
     }
 
     /*
