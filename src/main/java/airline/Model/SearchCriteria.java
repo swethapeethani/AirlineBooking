@@ -1,7 +1,5 @@
 package airline.Model;
 
-import sun.util.calendar.BaseCalendar;
-
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -12,16 +10,27 @@ public class SearchCriteria {
     private int numberOfPassengers;
     private String dateString;
     private Optional<LocalDate> date;
+    private String SeatingClass;
 
     public SearchCriteria(){
 
     }
 
-    public SearchCriteria(String source,String destination,int numberOfPassengers,Optional<LocalDate> date){
+
+    public SearchCriteria(String source, String destination, int numberOfPassengers, Optional<LocalDate> date, String SeatingClass){
         this.source = source;
         this.destination = destination;
         this.numberOfPassengers = numberOfPassengers;
         this.date = date;
+        this.SeatingClass = SeatingClass;
+    }
+
+    public String getSeatingClass() {
+        return SeatingClass;
+    }
+
+    public void setSeatingClass(String seatingClass) {
+        this.SeatingClass = seatingClass;
     }
 
     public String getSource() {
@@ -77,6 +86,8 @@ public class SearchCriteria {
     {
         return this.date = Optional.of(LocalDate.parse(this.dateString));
     }
+
+
 
     /*
     public boolean isNull(Field field) {

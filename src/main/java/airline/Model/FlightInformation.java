@@ -3,6 +3,7 @@ package airline.Model;
 import sun.util.calendar.BaseCalendar;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class FlightInformation {
@@ -10,18 +11,20 @@ public class FlightInformation {
     private String source;
     private String destination;
     private int availableSeats;
-    //private LocalDate date;
     private Optional<LocalDate> date;
+    private HashMap<String, TravelClass> travelClassMap;
+
+
     public FlightInformation(){
 
     }
 
-    //public FlightInformation( String sourceName, String destinationName, int availableSeats, LocalDate date){
-    public FlightInformation( String sourceName, String destinationName, int availableSeats, Optional<LocalDate> date){
+    public FlightInformation( String sourceName, String destinationName, int availableSeats, Optional<LocalDate> date, HashMap<String,TravelClass> travelClassMap){
         this.source = sourceName;
         this.destination = destinationName;
         this.availableSeats = availableSeats;
         this.date = date;
+        this.travelClassMap = travelClassMap;
     }
 
     public String getSource() {
@@ -48,16 +51,26 @@ public class FlightInformation {
         this.availableSeats = availableSeats;
     }
 
-    //public LocalDate getDate() { return date; }
 
     public Optional<LocalDate> getDate() { return date; }
 
     public void setDate(Optional<LocalDate> date) {
-   // public void setDate(LocalDate date) {
+
         this.date = date;
     }
-
+    public HashMap<String, TravelClass> getTravelClassMap() {
+        return travelClassMap;
     }
+
+    public void setTravelClassMap(HashMap<String, TravelClass> travelClassMap) {
+        this.travelClassMap = travelClassMap;
+    }
+
+
+    public int getSeatsByTravelClass(String seatingClassName){
+       return travelClassMap.get(seatingClassName).availableSeats;
+    }
+}
 
 
 
