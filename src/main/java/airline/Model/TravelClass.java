@@ -1,13 +1,17 @@
 package airline.Model;
 
 public class TravelClass {
-    int totalSeats;
-    int availableSeats;
+    private int totalSeats;
+    private int availableSeats;
+
+    private double baseFare;
 
 
-    public TravelClass(int totalSeats, int availableSeats){
+    public TravelClass(int totalSeats, int availableSeats,double baseFare){
         this.totalSeats = totalSeats;
         this.availableSeats = availableSeats;
+        this.baseFare = baseFare;
+
     }
 
     public int getAvailableSeats() {
@@ -17,5 +21,14 @@ public class TravelClass {
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
     }
+
+    public double getBaseFare() {
+        return baseFare;
+    }
+
+    public void setBaseFare(double baseFare) {
+        this.baseFare = baseFare;
+    }
+
 }
 

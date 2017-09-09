@@ -10,7 +10,12 @@ public class SeatAvailabilityService {
         if (flight.getAirplane().getTravelClassMap().containsKey(className) ){
 
             flight.setAvailableSeats(flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats());
-            return (flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats() >= numberOfPassengers);
+            if(flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats() >= numberOfPassengers){
+                flight.setTotalPrice(flight.getAirplane().getTravelClassMap().get(className).getBaseFare() *
+                        numberOfPassengers);
+
+            }
+            return true;
 
         }
         else

@@ -21,6 +21,7 @@ table, th, td {
             <th>Source</th>
             <th>Destination</th>
             <th>AvailableSeats</th>
+            <th>Total Price</th>
         </tr>
         </thead>
 
@@ -31,6 +32,7 @@ table, th, td {
             <td th:text="${flight.source}"/>
             <td th:text="${flight.destination}"/>
             <td th:text="${flight.availableSeats}"/>
+            <td th:text="${flight.totalPrice}"/>
         </tr>
         </tbody>
     </table>
