@@ -24,9 +24,9 @@ table, th, td {
 
         <tbody>
         <tr th:each="flight : ${searchResults}">
-            <td th:text="${flight.flightNumber}"/>
-            <td th:text="${flight.flightInformation.source}"/>
-            <td th:text="${flight.flightInformation.destination}"/>
+            <td th:text="${flight.flightName}"/>
+            <td th:text="${flight.source}"/>
+            <td th:text="${flight.destination}"/>
         </tr>
         </tbody>
     </table>

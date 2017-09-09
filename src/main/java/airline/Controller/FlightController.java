@@ -17,11 +17,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-/**
- * Created by rajashrk on 8/8/17.
- */
+
 @Controller
 @SpringBootApplication
 public class FlightController {
@@ -37,7 +34,6 @@ public class FlightController {
 
     //@Autowired
     private FlightSearchService flightSearchService;
-    //FlightRepository flightRepository;
 
     @RequestMapping(value = "/AirlineBooking", method = RequestMethod.GET)
     public String welcomeMessage(Model model) {
@@ -45,13 +41,11 @@ public class FlightController {
         CityRepository cityRepository = new CityRepository();
         List<City> cities = cityRepository.getCities();
 
-        //HashMap<String , TravelClass> travelClassHashMap = flightInformation.getTravelClassMap();
         model.addAttribute("cities", cities);
-        //model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1, java.util.Optional.of(LocalDate.of(2017, Month.SEPTEMBER, 5))));
         model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1,
-                Optional.of(LocalDate.of(2017, Month.SEPTEMBER, 6)),"Economy"));
+                LocalDate.of(2017, 9, 8),"Economy"));
         model.addAttribute("seatingClass", Arrays.asList(SeatingClass.values()));
-        //System.out.println(searchCriteria.getSource());
+
         return "flightSearch";
 
     }

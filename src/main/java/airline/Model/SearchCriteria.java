@@ -1,5 +1,7 @@
 package airline.Model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -9,7 +11,8 @@ public class SearchCriteria {
     private String destination;
     private int numberOfPassengers;
     private String dateString;
-    private Optional<LocalDate> date;
+    @DateTimeFormat(pattern = "yy-MM-dd")
+    private LocalDate departureDate;
     private String SeatingClass;
 
     public SearchCriteria(){
@@ -17,11 +20,11 @@ public class SearchCriteria {
     }
 
 
-    public SearchCriteria(String source, String destination, int numberOfPassengers, Optional<LocalDate> date, String SeatingClass){
+    public SearchCriteria(String source, String destination, int numberOfPassengers, LocalDate departureDate, String SeatingClass){
         this.source = source;
         this.destination = destination;
         this.numberOfPassengers = numberOfPassengers;
-        this.date = date;
+        this.departureDate = departureDate;
         this.SeatingClass = SeatingClass;
     }
 
@@ -66,25 +69,25 @@ public class SearchCriteria {
         this.dateString =dateString;
     }
 
-    public void setDate(String dateString) {
+    public void setDepartureDate(String dateString) {
         if(dateString == null || dateString.isEmpty()) {
-            this.date = null;
+            this.departureDate = null;
         }
         else {
-            this.date = Optional.of(LocalDate.parse(dateString));
+            this.departureDate = LocalDate.parse(dateString);
         }
 
         this.dateString = dateString;
     }
 
-    public LocalDate getDate()
+    public LocalDate getDepartureDate()
     {
         return LocalDate.parse(this.dateString);
     }
 
-    public Optional<LocalDate> getParsedDate()
+    public LocalDate getParsedDate()
     {
-        return this.date = Optional.of(LocalDate.parse(this.dateString));
+        return this.departureDate = LocalDate.parse(this.dateString);
     }
 
 

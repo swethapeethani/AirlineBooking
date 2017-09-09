@@ -1,64 +1,53 @@
 package airline.Services;
 
 import airline.Model.Flight;
-import airline.Model.FlightInformation;
 import airline.Model.SearchCriteria;
 import airline.Repository.FlightRepository;
-import airline.Model.TravelClass;
-import org.springframework.stereotype.Service;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //@Service
 public class FlightSearchService {
 
-    FlightInformation flightInformation;
-    FlightRepository flightRepository;
-    Flight flight1;
-    TravelClass travelClass;
+    private boolean searchFlightsBySourceDestination(Flight flight, String source, String destination){
 
-    public List<Flight> search(SearchCriteria searchCriteria){
+        return (flight.getSource().equalsIgnoreCase(source) && flight.getDestination().equalsIgnoreCase(destination));
 
-        flightRepository = new FlightRepository();
+    }
 
-        flight1 = new Flight();
+    private boolean  searchFlightByDepartureDate(Flight flight,LocalDate date) {
+
+        if(date == null){
+            date = LocalDate.now();
+        }
+
+        return (flight.getDepartureDate().equals(date));
+
+    }
+
+    private FlightRepository flightRepository = new FlightRepository();
+
+
+    public List<Flight> search(SearchCriteria searchCriteria) {
 
         List<Flight> flights = flightRepository.getFlights();
-        //System.out.println(" I am in Search Criteria");
 
-        System.out.println(searchCriteria.getSource());
-        System.out.println(searchCriteria.getDestination());
-        System.out.println(searchCriteria.getParsedDate());
-        System.out.println(searchCriteria.getDateString());
-        //for(Flight fli : flights) {
-         //   System.out.println(fli.getFlightInformation().getSource());
-        //}
-        return flights.stream()
-                .filter(flight -> flight.getFlightInformation().getSource().equals(searchCriteria.getSource()))
-                .filter(flight -> flight.getFlightInformation().getDestination().equals(searchCriteria.getDestination()))
-                .filter(flight -> flight.getFlightInformation().getAvailableSeats() >= searchCriteria.getNumberOfPassengers())
-                //.filter(flight -> flight.getFlightInformation().getDate().isEqual(searchCriteria.getDate()))
-                //.filter(flight -> flight.getFlightInformation().getDate().isEqual(searchCriteria.getParsedDate()))
-                .filter(flight -> flight.getFlightInformation().getDate().equals(searchCriteria.getParsedDate()))
+        List<Flight> flightList = new ArrayList<>();
 
-                //.filter(flight -> flight.getFlightInformation().getTravelClassMap().containsKey())
-                .collect(Collectors.toList());
+        for (Flight flight : flights) {
+            if ((searchFlightsBySourceDestination(flight, searchCriteria.getSource(), searchCriteria.getDestination())) &&
+                    (searchFlightByDepartureDate(flight, searchCriteria.getParsedDate()))) {
 
+                flightList.add(flight);
+            }
+
+
+        }
+
+        return flightList;
     }
 
-    public boolean checkSeatAvailabiltyByClass(Flight flight, SearchCriteria searchCriteria) {
-        return flight.getFlightInformation().getSeatsByTravelClass(searchCriteria.getSeatingClass()) >= searchCriteria.getNumberOfPassengers();
-    }
-
-    /*
-    <option th:each="SeatingClass : ${SeatingClass}"
-                   th:value="${dropSeatingClass}"
-                   th:text="${SeatingClass}">
-
-           </option>
-     */
 }
