@@ -2,8 +2,6 @@ package airline.Model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Optional;
 
 public class Flight {
 
@@ -14,7 +12,7 @@ public class Flight {
     @DateTimeFormat(pattern = "yy-MM-dd")
     private LocalDate departureDate;
     private Airplane airplane;
-    //private int totalAvailableSeats;
+    private int availableSeats;
 
 
     public Flight() {
@@ -28,7 +26,7 @@ public class Flight {
         this.destination = destination;
         this.departureDate = departureDate;
         this.airplane = airplane;
-        //this.totalAvailableSeats = totalAvailableSeats;
+        this.availableSeats = availableSeats;
     }
 
 
@@ -83,16 +81,16 @@ public class Flight {
         return airplane;
     }
 
-    /*
-    public int getTotalAvailableSeats() {
 
-        return totalAvailableSeats;
+    public int getAvailableSeats() {
+
+        return availableSeats;
     }
 
-    public void setTotalAvailableSeats(int availableSeats) {
+    public void setAvailableSeats(int availableSeats) {
 
-        this.totalAvailableSeats = availableSeats;
-    }*/
+        this.availableSeats = availableSeats;
+    }
 
 
     /*

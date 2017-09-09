@@ -9,5 +9,13 @@ public class TravelClass {
         this.totalSeats = totalSeats;
         this.availableSeats = availableSeats;
     }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
 }
 

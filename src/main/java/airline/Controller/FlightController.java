@@ -57,6 +57,7 @@ public class FlightController {
         List<Flight> availableFlights = flightSearchService.search(searchCriteria);
         System.out.println("size of available flights :" + availableFlights.size());
         model.addAttribute("searchResults", availableFlights);
+        //model.addAttribute("availableSeats",availableFlights.);
 
         return "resultFlights";
 

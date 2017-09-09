@@ -17,16 +17,20 @@ table, th, td {
         <thead>
         <tr>
             <th>Flight Id</th>
+            <th>Plane Model</th>
             <th>Source</th>
             <th>Destination</th>
+            <th>AvailableSeats</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="flight : ${searchResults}">
             <td th:text="${flight.flightName}"/>
+            <th th:text=" ${flight.airplane.airplaneName}"/>
             <td th:text="${flight.source}"/>
             <td th:text="${flight.destination}"/>
+            <td th:text="${flight.availableSeats}"/>
         </tr>
         </tbody>
     </table>

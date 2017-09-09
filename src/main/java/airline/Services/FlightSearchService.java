@@ -33,6 +33,8 @@ public class FlightSearchService {
 
     public List<Flight> search(SearchCriteria searchCriteria) {
 
+        SeatAvailabilityService seatAvailabilityService = new SeatAvailabilityService();
+
         List<Flight> flights = flightRepository.getFlights();
 
         List<Flight> flightList = new ArrayList<>();
@@ -44,6 +46,12 @@ public class FlightSearchService {
                 flightList.add(flight);
             }
 
+        }
+
+        for(Flight flight : flightList){
+            if (!seatAvailabilityService.seatAvailabiltyByClass(flight,searchCriteria.getSeatingClass(),searchCriteria.getNumberOfPassengers())) {
+                flightList.remove(flight);
+            }
 
         }
 
