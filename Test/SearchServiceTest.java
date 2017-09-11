@@ -3,6 +3,8 @@ import airline.Model.SearchCriteria;
 import airline.Services.FlightSearchService;
 import java.time.LocalDate;
 import java.util.Date;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class SearchServiceTest{
 

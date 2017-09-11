@@ -3,61 +3,53 @@ package airline.Services;
 import airline.Model.Flight;
 import airline.Model.SearchCriteria;
 import airline.Repository.FlightRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-//@Service
+@Service
 public class FlightSearchService {
 
-    private FlightRepository flightRepository = new FlightRepository();
-
-    private boolean searchFlightsBySourceDestination(Flight flight, String source, String destination){
-
-        return (flight.getSource().equalsIgnoreCase(source) && flight.getDestination().equalsIgnoreCase(destination));
+    public FlightSearchService() {
 
     }
 
-    private boolean  searchFlightByDepartureDate(Flight flight,LocalDate date) {
+    private FlightRepository flightRepository = new FlightRepository();
 
-        if(date == null){
-            date = LocalDate.now();
-        }
+    private Predicate<Flight> isFlightAvailableForSourceDestination(String source, String destination){
 
-        return (flight.getDepartureDate().equals(date));
+        return x -> x.isFlightAvailableForSourceDestination(source, destination);
+
+    }
+
+    private Predicate<Flight> isFlightAvailableForDepartureDate( LocalDate departureDate) {
+
+        return x -> x.isFlightAvailableForDepartureDate(departureDate);
+
+    }
+
+    private Predicate<Flight> isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers){
+
+        return x -> x.isFlightAvailableForTravelClass(travelClassName, numberOfPassengers);
 
     }
 
 
     public List<Flight> search(SearchCriteria searchCriteria) {
 
-        BookingService bookingService = new BookingService();
-
         List<Flight> flights = flightRepository.getFlights();
 
-        List<Flight> flightList = new ArrayList<>();
+        return flights.stream()
+                .filter(isFlightAvailableForSourceDestination(searchCriteria.getSource(),searchCriteria.getDestination()))
+                .filter(isFlightAvailableForDepartureDate(searchCriteria.getParsedDate()))
+                .filter(isFlightAvailableForTravelClass(searchCriteria.getSeatingClass(),searchCriteria.getNumberOfPassengers()))
+                .collect(Collectors.toList());
 
-       for (Flight flight : flights) {
-            if ((searchFlightsBySourceDestination(flight, searchCriteria.getSource(), searchCriteria.getDestination())) &&
-                    (searchFlightByDepartureDate(flight, searchCriteria.getParsedDate())) &&
-                    (bookingService.seatAvailabilityByClass(flight,searchCriteria.getSeatingClass(),searchCriteria.getNumberOfPassengers()))) {
 
-                flightList.add(flight);
-            }
-
-       }
-
-       /* for(Flight flight : flightList){
-            if (!bookingService.seatAvailabilityByClass(flight,searchCriteria.getSeatingClass(),searchCriteria.getNumberOfPassengers())) {
-                flightList.remove(flight);
-            }
-
-        }*/
-
-        return flightList;
     }
 
 }

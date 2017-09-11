@@ -2,11 +2,14 @@ package airline;
 
 import airline.Controller.FlightController;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class AirlineBookingApp {
 
     public static void main(String []args) {
 
-        SpringApplication.run(FlightController.class,args);
+        SpringApplication.run(AirlineBookingApp.class,args);
     }
 }

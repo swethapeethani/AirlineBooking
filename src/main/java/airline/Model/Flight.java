@@ -107,22 +107,8 @@ public class Flight {
     }
 
 
+    public boolean isFlightAvailableForSourceDestination(String source, String destination){
 
-    /*
-    public HashMap<String, TravelClass> getTravelClassMap() {
-        return travelClassMap;
-    }
-
-    public void setTravelClassMap(HashMap<String, TravelClass> travelClassMap) {
-        this.travelClassMap = travelClassMap;
-    }*/
-
-
-    /*public int getSeatsByTravelClass(String seatingClassName){
-        return travelClassMap.get(seatingClassName).availableSeats;
-    }
-
-    public boolean searchFlightsBySourceDestination(String source, String destination){
         if((source.equalsIgnoreCase(getSource())) && (destination.equalsIgnoreCase(getDestination())))
             return  true;
         else
@@ -130,9 +116,45 @@ public class Flight {
 
     }
 
-    public boolean searchForTravelClass(){
+    public boolean isFlightAvailableForDepartureDate(LocalDate departureDate){
 
+        if(departureDate == null){
+
+            departureDate = LocalDate.now();
+        }
+
+        return (getDepartureDate().equals(departureDate));
     }
-*/
+
+    public boolean isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers){
+
+        TravelClass travelClass = getAirplane().getTravelClassMap().get(travelClassName);
+
+        availableSeats = travelClass.getAvailableSeats();
+
+        if(availableSeats >= numberOfPassengers) {
+
+            switch (travelClassName) {
+                case "Economy":
+                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
+                    break;
+                case "First":
+                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
+                    break;
+                case "Business":
+                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
+                    break;
+                default:
+                    break;
+
+            }      ;
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
 
 }
