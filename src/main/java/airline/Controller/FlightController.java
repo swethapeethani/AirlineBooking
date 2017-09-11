@@ -2,8 +2,9 @@ package airline.Controller;
 
 import airline.Model.*;
 import airline.Services.FlightSearchService;
+import airline.Services.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -23,17 +24,15 @@ import java.util.List;
 @SpringBootApplication
 public class FlightController {
 
-    public static void main(String []args) {
-        SpringApplication.run(FlightController.class,args);
-    }
-
-
-    private CityRepository cityServices;
-    private Flight flight;
-    private SearchCriteria searchCriteria;
-
     //@Autowired
     private FlightSearchService flightSearchService;
+
+    //@Autowired
+    private BookingService bookingService;
+
+
+    private Flight flight;
+    private SearchCriteria searchCriteria;
 
     @RequestMapping(value = "/AirlineBooking", method = RequestMethod.GET)
     public String welcomeMessage(Model model) {

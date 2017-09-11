@@ -1,25 +1,32 @@
 package airline.Services;
 
 import airline.Model.Flight;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class SeatAvailabilityService {
+//@Service
+public class BookingService {
+
     FlightSearchService flightSearchService;
 
-    public boolean seatAvailabiltyByClass(Flight flight, String className, int numberOfPassengers){
+    public  boolean seatAvailabilityByClass(Flight flight, String className, int numberOfPassengers){
 
         if (flight.getAirplane().getTravelClassMap().containsKey(className) ){
 
-            flight.setAvailableSeats(flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats());
+
             if(flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats() >= numberOfPassengers){
                 flight.setTotalPrice(flight.getAirplane().getTravelClassMap().get(className).getBaseFare() *
                         numberOfPassengers);
+                flight.setAvailableSeats(flight.getAirplane().getTravelClassMap().get(className).getAvailableSeats());
 
+                return true;
             }
-            return true;
+
+            else { return false; }
+
 
         }
-        else
-            return false;
+        else { return false; }
 
     }
 

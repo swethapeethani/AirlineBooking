@@ -9,9 +9,12 @@ public class Flight {
     private String flightId;
     private String source;
     private String destination;
+
     @DateTimeFormat(pattern = "yy-MM-dd")
     private LocalDate departureDate;
+
     private Airplane airplane;
+
     private int availableSeats;
     private double totalPrice;
 
