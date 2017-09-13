@@ -96,17 +96,5 @@ public class SearchCriteria {
         return this.departureDate;
     }
 
-    public LocalDate getParsedDate()
-    {
-        if(dateString == null || dateString.isEmpty()) {
-            this.departureDate = LocalDate.now();
-        }
-        else {
-            this.departureDate = LocalDate.parse(dateString);
-        }
-        return this.departureDate;
-    }
-
-
 
   }

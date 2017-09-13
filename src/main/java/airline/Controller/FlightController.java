@@ -30,11 +30,12 @@ public class FlightController {
 
         CityRepository cityRepository = new CityRepository();
         List<City> cities = cityRepository.getCities();
+        SeatingClass seatingClass[] = SeatingClass.values();
 
         model.addAttribute("cities", cities);
         model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1,
                 LocalDate.of(2017, 9, 8),"Economy"));
-        model.addAttribute("seatingClass", Arrays.asList(SeatingClass.values()));
+        model.addAttribute("seatingClass", seatingClass);
 
         return "flightSearch";
 
@@ -48,15 +49,14 @@ public class FlightController {
             return "flightSearch";
         }
         else {
-            if(searchCriteria.getSeatingClass().isEmpty() || searchCriteria.getDepartureDate().equals(null)  ) {
-                model.addAttribute("error", "Invalid date or Travel class");
+            if(searchCriteria.getSeatingClass().isEmpty()) {
+                model.addAttribute("error", "Select Travel class");
                 return "flightSearch";
             }
 
         }
 
             List<Flight> availableFlights = flightSearchService.search(searchCriteria);
-            //System.out.println("size of available flights :" + availableFlights.size());
             model.addAttribute("searchResults", availableFlights);
 
             return "resultFlights";

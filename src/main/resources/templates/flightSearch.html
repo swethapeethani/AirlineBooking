@@ -12,7 +12,6 @@
     <div class="container">
         <p th:text="'Source: '"/>
         <select title="Source" class="form-control" id="source" name="source" th:field="*{source}">
-            <option value="">Select Source</option>
             <option th:each="city : ${cities}"
                     th:value="${city.id}"
                     th:text="${city.name}">
@@ -21,7 +20,6 @@
 
         <p th:text="'Destination: '"/>
         <select class="form-control" id="destination" name="destination" th:field="*{destination}">
-            <option value="">Select Destination</option>
             <option th:each="city : ${cities}"
                     th:value="${city.id}"
                     th:text="${city.name}">
@@ -33,10 +31,9 @@
         <input type="date" name="dateString" id="departureDate" th:field="*{dateString}" th:min="${today}"/>
 
        <select class="form-control" id="SeatingClass" name="SeatingClass" th:field = "*{SeatingClass}">
-           <option value ="">Seating Class</option>
            <option th:each="dropDownItem : ${seatingClass}"
-                   th:value="${dropDownItem.name()}"
-                   th:text="${dropDownItem.name()}">
+                   th:value="${dropDownItem}"
+                   th:text="${dropDownItem}">
 
            </option>
        </select>
