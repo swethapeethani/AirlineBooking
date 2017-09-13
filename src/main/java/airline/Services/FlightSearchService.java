@@ -38,6 +38,7 @@ public class FlightSearchService {
 
     }
 
+    //private void calculateTotalTicketPriceForEconomy()
 
     public List<Flight> search(SearchCriteria searchCriteria) {
 
@@ -45,7 +46,7 @@ public class FlightSearchService {
 
         return flights.stream()
                 .filter(isFlightAvailableForSourceDestination(searchCriteria.getSource(),searchCriteria.getDestination()))
-                .filter(isFlightAvailableForDepartureDate(searchCriteria.getParsedDate()))
+                .filter(isFlightAvailableForDepartureDate(searchCriteria.getDepartureDate()))
                 .filter(isFlightAvailableForTravelClass(searchCriteria.getSeatingClass(),searchCriteria.getNumberOfPassengers()))
                 .collect(Collectors.toList());
 

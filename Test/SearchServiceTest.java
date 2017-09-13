@@ -12,7 +12,7 @@ public class SearchServiceTest{
     public void showFlightsFromHYDtoBLR(){
         FlightSearchService flightSearchService = new FlightSearchService();
         SearchCriteria searchCriteria = new SearchCriteria("HYD","BLR",50,LocalDate.of(2017,9,11),"Economy");
-        assertEquals(flightSearchService.search(searchCriteria).size(),4);
+        assertEquals(flightSearchService.search(searchCriteria).size(),2);
     }
 
 }

@@ -25,8 +25,8 @@ public class FlightController {
     private Flight flight;
     private SearchCriteria searchCriteria;
 
-    @RequestMapping(value = "/AirlineBooking", method = RequestMethod.GET)
-    public String welcomeMessage(Model model) {
+    @RequestMapping(value = {"/AirlineBooking", "/"}, method = RequestMethod.GET)
+    public String vapasiAirlines(Model model) {
 
         CityRepository cityRepository = new CityRepository();
         List<City> cities = cityRepository.getCities();
@@ -43,11 +43,23 @@ public class FlightController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String getFlights(@ModelAttribute(value = "searchCriteria")SearchCriteria searchCriteria, Model model) {
 
-        List<Flight> availableFlights = flightSearchService.search(searchCriteria);
-        //System.out.println("size of available flights :" + availableFlights.size());
-        model.addAttribute("searchResults", availableFlights);
+        if(searchCriteria.getSource().isEmpty() || searchCriteria.getDestination().isEmpty() ) {
+            model.addAttribute("error", "Invalid Source or Destination");
+            return "flightSearch";
+        }
+        else {
+            if(searchCriteria.getSeatingClass().isEmpty() || searchCriteria.getDepartureDate().equals(null)  ) {
+                model.addAttribute("error", "Invalid date or Travel class");
+                return "flightSearch";
+            }
 
-        return "resultFlights";
+        }
+
+            List<Flight> availableFlights = flightSearchService.search(searchCriteria);
+            //System.out.println("size of available flights :" + availableFlights.size());
+            model.addAttribute("searchResults", availableFlights);
+
+            return "resultFlights";
 
     }
 }

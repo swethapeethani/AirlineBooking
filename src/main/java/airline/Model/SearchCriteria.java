@@ -62,6 +62,11 @@ public class SearchCriteria {
 
 
     public String getDateString() {
+
+        if(dateString == null || dateString.isEmpty()) {
+            this.departureDate = null;
+            dateString = LocalDate.now().toString();
+        }
         return dateString;
     }
 
@@ -71,7 +76,7 @@ public class SearchCriteria {
 
     public void setDepartureDate(String dateString) {
         if(dateString == null || dateString.isEmpty()) {
-            this.departureDate = null;
+            this.departureDate = LocalDate.now();
         }
         else {
             this.departureDate = LocalDate.parse(dateString);
@@ -82,12 +87,24 @@ public class SearchCriteria {
 
     public LocalDate getDepartureDate()
     {
-        return LocalDate.parse(this.dateString);
+        if(dateString == null || dateString.isEmpty()) {
+            this.departureDate = null;
+        }
+        else {
+            this.departureDate = LocalDate.parse(dateString);
+        }
+        return this.departureDate;
     }
 
     public LocalDate getParsedDate()
     {
-        return this.departureDate = LocalDate.parse(this.dateString);
+        if(dateString == null || dateString.isEmpty()) {
+            this.departureDate = LocalDate.now();
+        }
+        else {
+            this.departureDate = LocalDate.parse(dateString);
+        }
+        return this.departureDate;
     }
 
 

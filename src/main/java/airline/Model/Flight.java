@@ -136,7 +136,21 @@ public class Flight {
 
             switch (travelClassName) {
                 case "Economy":
+                    int seatsOccupied = travelClass.getTotalSeats()- travelClass.getAvailableSeats();
+                    int first40Limit = (int)Math.round(travelClass.getTotalSeats() * 0.4);
+                    int next50Limit = (int)Math.round(travelClass.getTotalSeats() * 0.9);
+                    //default case when seats booked are in first 40% limit
                     totalPrice = travelClass.getBaseFare() * numberOfPassengers;
+
+                    if (seatsOccupied > first40Limit && seatsOccupied <next50Limit ){
+                        totalPrice =  totalPrice + travelClass.getBaseFare() * numberOfPassengers * 0.3;
+                    }
+                    else {
+                        if(seatsOccupied > next50Limit){
+                            totalPrice =  totalPrice + travelClass.getBaseFare() * numberOfPassengers * 0.6;
+                        }
+                    }
+
                     break;
                 case "First":
                     totalPrice = travelClass.getBaseFare() * numberOfPassengers;
@@ -147,7 +161,7 @@ public class Flight {
                 default:
                     break;
 
-            }      ;
+            }
             return true;
         }
 

@@ -21,11 +21,11 @@ public class FlightRepository {
 
     public ArrayList<Flight> getFlights(){
 
-        travelClassMap1.put("Economy",new TravelClass(100,100,6000));
+        travelClassMap1.put("Economy",new TravelClass(100,9,6000));
         travelClassMap1.put("First",new TravelClass(20,10,12000));
         travelClassMap1.put("Business",new TravelClass(10,10, 30000));
 
-        travelClassMap2.put("Economy",new TravelClass(100,80,8000));
+        travelClassMap2.put("Economy",new TravelClass(100,50,8000));
         travelClassMap2.put("First",new TravelClass(0,0,0));
         travelClassMap2.put("Business",new TravelClass(10,10, 32000));
 
