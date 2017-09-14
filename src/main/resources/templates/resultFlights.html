@@ -17,10 +17,10 @@ table, th, td {
         <thead>
         <tr>
             <th>Flight Id</th>
-            <th>Plane Model</th>
+            <!--<th>Plane Model</th>-->
             <th>Source</th>
             <th>Destination</th>
-            <th>AvailableSeats</th>
+            <!--<th>AvailableSeats</th>-->
             <th>Total Price</th>
         </tr>
         </thead>
@@ -28,10 +28,10 @@ table, th, td {
         <tbody>
         <tr th:each="flight : ${searchResults}">
             <td th:text="${flight.flightName}"/>
-            <th th:text=" ${flight.airplane.airplaneName}"/>
+            <!--<th th:text=" ${flight.airplane.airplaneName}"/>-->
             <td th:text="${flight.source}"/>
             <td th:text="${flight.destination}"/>
-            <td th:text="${flight.availableSeats}"/>
+            <!--<td th:text="${flight.availableSeats}"/> -->
             <td th:text="${flight.totalPrice}"/>
         </tr>
         </tbody>

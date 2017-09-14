@@ -41,9 +41,9 @@ public class FlightRepository {
         airplaneMap.put("AirBus-319",travelClassMap2);
         airplaneMap.put("AirBus-321",travelClassMap3);*/
 
-        flights.add(new Flight("Emirates", "EMR001", "HYD", "BLR", LocalDate.of(2017,9,11), BNG001,0,0));
-        flights.add(new Flight("Indigo", "IND001", "HYD", "BLR", LocalDate.of(2017,9,11), AB001,0,0));
-        flights.add(new Flight("SpiceJet", "SJ001", "HYD", "BLR", LocalDate.of(2017,9,15), AB002,0,0));
+        flights.add(new Flight("Emirates", "EMR001", "HYD", "BLR", LocalDate.of(2017,9,14), BNG001,0,0));
+        flights.add(new Flight("Indigo", "IND001", "HYD", "BLR", LocalDate.of(2017,9,15), AB001,0,0));
+        flights.add(new Flight("SpiceJet", "SJ001", "HYD", "BLR", LocalDate.of(2017,9,18), AB002,0,0));
         flights.add(new Flight("JetAirways", "JA001", "HYD", "CHN", LocalDate.of(2017,9,18), AB001,0,0));
         flights.add(new Flight("IndianAirlines", "IA001", "BLR", "CHN", LocalDate.of(2017,9,13), BNG001,0,0));
         flights.add(new Flight("KingFisher", "KF001", "BLR", "CHN",LocalDate.of(2017,9,12), AB002,0,0));

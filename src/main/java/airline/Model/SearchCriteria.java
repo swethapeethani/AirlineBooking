@@ -29,6 +29,8 @@ public class SearchCriteria {
     }
 
     public String getSeatingClass() {
+
+        SeatingClass = (SeatingClass == null) ? "Economy" : SeatingClass;
         return SeatingClass;
     }
 
@@ -37,7 +39,9 @@ public class SearchCriteria {
     }
 
     public String getSource() {
-        return source;
+        this.source = (this.source == null ) ? "HYD" : this.source;
+
+        return this.source;
     }
 
     public void setSource(String source) {
@@ -45,7 +49,9 @@ public class SearchCriteria {
     }
 
     public String getDestination() {
-        return destination;
+
+        this.destination = (this.destination == null) ? "BLR" : this.destination ;
+        return this.destination;
     }
 
     public void setDestination(String destination) {
@@ -53,10 +59,12 @@ public class SearchCriteria {
     }
 
     public int getNumberOfPassengers() {
+        numberOfPassengers = (numberOfPassengers == 0) ? 1 : numberOfPassengers;
         return numberOfPassengers;
     }
 
     public void setNumberOfPassengers(int numberOfPassengers) {
+
         this.numberOfPassengers = numberOfPassengers;
     }
 
@@ -64,7 +72,7 @@ public class SearchCriteria {
     public String getDateString() {
 
         if(dateString == null || dateString.isEmpty()) {
-            this.departureDate = null;
+            //this.departureDate = LocalDate.now();
             dateString = LocalDate.now().toString();
         }
         return dateString;
@@ -74,25 +82,12 @@ public class SearchCriteria {
         this.dateString =dateString;
     }
 
-    public void setDepartureDate(String dateString) {
-        if(dateString == null || dateString.isEmpty()) {
-            this.departureDate = LocalDate.now();
-        }
-        else {
-            this.departureDate = LocalDate.parse(dateString);
-        }
-
-        this.dateString = dateString;
+    public void setDepartureDate(LocalDate departureDate){
+        this.departureDate = departureDate;
     }
 
     public LocalDate getDepartureDate()
     {
-        if(dateString == null || dateString.isEmpty()) {
-            this.departureDate = null;
-        }
-        else {
-            this.departureDate = LocalDate.parse(dateString);
-        }
         return this.departureDate;
     }
 

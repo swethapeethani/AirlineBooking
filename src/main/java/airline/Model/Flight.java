@@ -109,26 +109,26 @@ public class Flight {
 
     public boolean isFlightAvailableForSourceDestination(String source, String destination){
 
-        if((source.equalsIgnoreCase(getSource())) && (destination.equalsIgnoreCase(getDestination())))
-            return  true;
-        else
-            return false;
+        return (source.equalsIgnoreCase(getSource())) && (destination.equalsIgnoreCase(getDestination()));
 
     }
 
     public boolean isFlightAvailableForDepartureDate(LocalDate departureDate){
 
-        if(departureDate == null){
+        if(departureDate == null || departureDate.isBefore(LocalDate.now())){
 
-            departureDate = LocalDate.now();
+            //departureDate = LocalDate.now();
+            return true;
         }
-
-        return (getDepartureDate().equals(departureDate));
+        else {
+            return (getDepartureDate().equals(departureDate));
+        }
     }
 
     public boolean isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers){
 
         TravelClass travelClass = getAirplane().getTravelClassMap().get(travelClassName);
+
 
         availableSeats = travelClass.getAvailableSeats();
 
