@@ -1,4 +1,5 @@
 package airline.Model;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class Flight {
     }
 
     public Flight(String flightName, String flightId, String source, String destination, LocalDate departureDate,
-                  Airplane airplane, int availableSeats, double totalPrice){
+                  Airplane airplane, int availableSeats, double totalPrice) {
         this.flightId = flightId;
         this.flightName = flightName;
         this.source = source;
@@ -56,8 +57,7 @@ public class Flight {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
@@ -71,21 +71,22 @@ public class Flight {
         this.destination = destination;
     }
 
-    public LocalDate getDepartureDate() { return departureDate; }
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
 
     public void setDepartureDate(LocalDate departureDate) {
 
         this.departureDate = departureDate;
     }
 
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
-    }
-
     public Airplane getAirplane() {
         return airplane;
     }
 
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
 
     public int getAvailableSeats() {
 
@@ -107,67 +108,31 @@ public class Flight {
     }
 
 
-    public boolean isFlightAvailableForSourceDestination(String source, String destination){
+    public boolean isFlightAvailableForSourceDestination(String source, String destination) {
 
         return (source.equalsIgnoreCase(getSource())) && (destination.equalsIgnoreCase(getDestination()));
 
     }
 
-    public boolean isFlightAvailableForDepartureDate(LocalDate departureDate){
+    public boolean isFlightAvailableForDepartureDate(LocalDate departureDate) {
 
-        if(departureDate == null || departureDate.isBefore(LocalDate.now())){
-
-            //departureDate = LocalDate.now();
+        if ((departureDate == null || departureDate.isBefore(LocalDate.now())) && !getDepartureDate().isBefore(LocalDate.now())) {
             return true;
-        }
-        else {
+        } else {
             return (getDepartureDate().equals(departureDate));
         }
     }
 
-    public boolean isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers){
+    public boolean isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers) {
 
-        TravelClass travelClass = getAirplane().getTravelClassMap().get(travelClassName);
+        return getAirplane()
+                .getTravelClassMap()
+                .get(travelClassName)
+                .getAvailableSeats() >= numberOfPassengers;
+
+            //totalPrice = travelClass.getTotalPrice(numberOfPassengers);
 
 
-        availableSeats = travelClass.getAvailableSeats();
-
-        if(availableSeats >= numberOfPassengers) {
-
-            switch (travelClassName) {
-                case "Economy":
-                    int seatsOccupied = travelClass.getTotalSeats()- travelClass.getAvailableSeats();
-                    int first40Limit = (int)Math.round(travelClass.getTotalSeats() * 0.4);
-                    int next50Limit = (int)Math.round(travelClass.getTotalSeats() * 0.9);
-                    //default case when seats booked are in first 40% limit
-                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
-
-                    if (seatsOccupied > first40Limit && seatsOccupied <next50Limit ){
-                        totalPrice =  totalPrice + travelClass.getBaseFare() * numberOfPassengers * 0.3;
-                    }
-                    else {
-                        if(seatsOccupied > next50Limit){
-                            totalPrice =  totalPrice + travelClass.getBaseFare() * numberOfPassengers * 0.6;
-                        }
-                    }
-
-                    break;
-                case "First":
-                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
-                    break;
-                case "Business":
-                    totalPrice = travelClass.getBaseFare() * numberOfPassengers;
-                    break;
-                default:
-                    break;
-
-            }
-            return true;
-        }
-
-        else {
-            return false;
-        }
     }
 
 

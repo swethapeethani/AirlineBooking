@@ -1,7 +1,7 @@
 package airline.Controller;
 
 import airline.Model.*;
-import airline.Services.FlightSearchService;
+import airline.Services.IFlightSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ import java.util.List;
 public class FlightController {
 
     @Autowired
-    private FlightSearchService flightSearchService;
+    private IFlightSearchService IFlightSearchService;
 
     private Flight flight;
     private SearchCriteria searchCriteria;
@@ -59,7 +58,7 @@ public class FlightController {
 
         }
 
-            List<Flight> availableFlights = flightSearchService.search(searchCriteria);
+            List<FlightView> availableFlights = IFlightSearchService.getFlightsView(searchCriteria);
             model.addAttribute("searchResults", availableFlights);
 
             return "resultFlights";

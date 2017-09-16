@@ -5,6 +5,7 @@ public class TravelClass {
     private int totalSeats;
     private int availableSeats;
     private double baseFare;
+    private double totalPrice;
 
 
     public TravelClass(int totalSeats, int availableSeats,double baseFare){
@@ -22,19 +23,19 @@ public class TravelClass {
         return availableSeats;
     }
 
-    /*public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
-    }*/
-
     public double getBaseFare() {
         return baseFare;
     }
 
+    public double getTotalPrice(int numberOfPassenger){
 
+        int seatsOccupied = totalSeats - availableSeats;
+        totalPrice = baseFare * numberOfPassenger;
+        totalPrice  = (seatsOccupied > totalSeats * 0.4 && seatsOccupied < totalSeats * 0.9) ? totalPrice + totalPrice * 0.3 :
+                ((seatsOccupied > totalSeats * 0.9) ? totalPrice + totalPrice * 0.6 : totalPrice);
+        return totalPrice;
+    }
 
-    /*public void setBaseFare(double baseFare) {
-        this.baseFare = baseFare;
-    }*/
 
 }
 

@@ -20,22 +20,26 @@ table, th, td {
             <!--<th>Plane Model</th>-->
             <th>Source</th>
             <th>Destination</th>
+            <th>Departure Date</th>
             <!--<th>AvailableSeats</th>-->
             <th>Total Price</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="flight : ${searchResults}">
-            <td th:text="${flight.flightName}"/>
+        <tr th:each="flightView : ${searchResults}">
+            <td th:text="${flightView.flightName}"/>
             <!--<th th:text=" ${flight.airplane.airplaneName}"/>-->
-            <td th:text="${flight.source}"/>
-            <td th:text="${flight.destination}"/>
-            <!--<td th:text="${flight.availableSeats}"/> -->
-            <td th:text="${flight.totalPrice}"/>
+            <td th:text="${flightView.source}"/>
+            <td th:text="${flightView.destination}"/>
+            <td th:text="${flightView.departureDate}"/>
+            <td th:text="${flightView.totalPrice}"/>
         </tr>
         </tbody>
     </table>
+</div>
+<div>
+    <a href="/AirlineBooking" >Back to Search</a>
 </div>
 </body>
 

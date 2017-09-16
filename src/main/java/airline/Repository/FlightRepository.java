@@ -1,6 +1,7 @@
 package airline.Repository;
 
 import airline.Model.*;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-public class FlightRepository {
+@Repository
+public class FlightRepository implements IFlightRepository {
 
     private ArrayList<Flight> flights = new ArrayList<>();
 
@@ -19,6 +20,7 @@ public class FlightRepository {
     private HashMap<String , TravelClass> travelClassMap2 = new HashMap<>();
     private HashMap<String , TravelClass> travelClassMap3 = new HashMap<>();
 
+    @Override
     public ArrayList<Flight> getFlights(){
 
         travelClassMap1.put("Economy",new TravelClass(100,80,6000));
@@ -42,11 +44,11 @@ public class FlightRepository {
         airplaneMap.put("AirBus-321",travelClassMap3);*/
 
         flights.add(new Flight("Emirates", "EMR001", "HYD", "BLR", LocalDate.of(2017,9,14), BNG001,0,0));
-        flights.add(new Flight("Indigo", "IND001", "HYD", "BLR", LocalDate.of(2017,9,15), AB001,0,0));
+        flights.add(new Flight("Indigo", "IND001", "HYD", "BLR", LocalDate.of(2017,9,16), AB001,0,0));
         flights.add(new Flight("SpiceJet", "SJ001", "HYD", "BLR", LocalDate.of(2017,9,18), AB002,0,0));
         flights.add(new Flight("JetAirways", "JA001", "HYD", "CHN", LocalDate.of(2017,9,18), AB001,0,0));
-        flights.add(new Flight("IndianAirlines", "IA001", "BLR", "CHN", LocalDate.of(2017,9,13), BNG001,0,0));
-        flights.add(new Flight("KingFisher", "KF001", "BLR", "CHN",LocalDate.of(2017,9,12), AB002,0,0));
+        flights.add(new Flight("IndianAirlines", "IA001", "BLR", "CHN", LocalDate.of(2017,9,20), BNG001,0,0));
+        flights.add(new Flight("KingFisher", "KF001", "BLR", "CHN",LocalDate.of(2017,9,20), AB002,0,0));
         flights.add(new Flight("AirIndia", "AI001", "PUN", "BLR", LocalDate.of(2017,9,13), AB002,0,0));
         flights.add(new Flight("AirAsia", "AA001", "CHN", "HYD", LocalDate.of(2017,9,13), BNG001,0,0));
 
