@@ -3,6 +3,7 @@ package airline.Services;
 import airline.Model.Flight;
 import airline.Model.FlightView;
 import airline.Model.SearchCriteria;
+import airline.Model.TravelClass;
 import airline.Repository.FlightRepository;
 import airline.Repository.IFlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,8 @@ public class FlightSearchService implements IFlightSearchService {
             flightView.setSource(flight.getSource());
             flightView.setDestination(flight.getDestination());
             flightView.setDepartureDate(flight.getDepartureDate().toString());
-            flightView.setTotalPrice(flight.getTotalPrice());
+            TravelClass travelClass = flight.getAirplane().getTravelClassMap().get(searchCriteria.getSeatingClass());
+            flightView.setTotalPrice(travelClass.calculateTotalPrice(searchCriteria));
             flightViewList.add(flightView);
         }
         return flightViewList;

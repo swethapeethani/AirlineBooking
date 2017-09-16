@@ -88,7 +88,7 @@ public class SearchCriteria {
 
     public LocalDate getDepartureDate()
     {
-        return this.departureDate;
+        return LocalDate.parse(this.dateString);
     }
 
 

@@ -16,23 +16,17 @@ public class Flight {
 
     private Airplane airplane;
 
-    private int availableSeats;
-    private double totalPrice;
-
-
     public Flight() {
     }
 
     public Flight(String flightName, String flightId, String source, String destination, LocalDate departureDate,
-                  Airplane airplane, int availableSeats, double totalPrice) {
+                  Airplane airplane) {
         this.flightId = flightId;
         this.flightName = flightName;
         this.source = source;
         this.destination = destination;
         this.departureDate = departureDate;
         this.airplane = airplane;
-        this.availableSeats = availableSeats;
-        this.totalPrice = totalPrice;
     }
 
 
@@ -87,26 +81,6 @@ public class Flight {
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
-
-    public int getAvailableSeats() {
-
-        return availableSeats;
-    }
-
-    public void setAvailableSeats(int availableSeats) {
-
-        this.availableSeats = availableSeats;
-    }
-
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
 
     public boolean isFlightAvailableForSourceDestination(String source, String destination) {
 

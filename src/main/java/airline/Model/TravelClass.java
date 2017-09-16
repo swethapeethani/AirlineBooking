@@ -1,18 +1,24 @@
 package airline.Model;
 
-public class TravelClass {
+import sun.jvm.hotspot.opto.HaltNode;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+
+public abstract class TravelClass {
 
     private int totalSeats;
     private int availableSeats;
     private double baseFare;
     private double totalPrice;
 
+    //HashMap<String, Method> calculateTotalPrice = new HashMap<>();
 
-    public TravelClass(int totalSeats, int availableSeats,double baseFare){
+    public TravelClass(int totalSeats, int availableSeats,double baseFare, double totalPrice){
         this.totalSeats = totalSeats;
         this.availableSeats = availableSeats;
         this.baseFare = baseFare;
-
+        this.totalPrice = totalPrice;
     }
 
     public int getTotalSeats() {
@@ -27,14 +33,18 @@ public class TravelClass {
         return baseFare;
     }
 
-    public double getTotalPrice(int numberOfPassenger){
+    public double calculateTotalPrice(SearchCriteria searchCriteria){
+        return getTotalPrice();
+    }
 
-        int seatsOccupied = totalSeats - availableSeats;
-        totalPrice = baseFare * numberOfPassenger;
-        totalPrice  = (seatsOccupied > totalSeats * 0.4 && seatsOccupied < totalSeats * 0.9) ? totalPrice + totalPrice * 0.3 :
-                ((seatsOccupied > totalSeats * 0.9) ? totalPrice + totalPrice * 0.6 : totalPrice);
+    public double getTotalPrice() {
         return totalPrice;
     }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
 
 
 }
