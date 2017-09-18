@@ -8,15 +8,15 @@ public class Business extends TravelClass {
         super(totalSeats,availableSeats,baseFare, totalPrice);
     }
 
-    public double calculateTotalPrice(SearchCriteria searchCriteria) {
+    public double calculateTotalPrice(int numberOfPassengers, LocalDate departureDate) {
 
-        double totalPrice = getBaseFare() * searchCriteria.getNumberOfPassengers();
+        double totalPrice = getBaseFare() * numberOfPassengers;
 
         //1,5,7 represent Monday,Friday, Sunday respectively
-        totalPrice = ((searchCriteria.getDepartureDate().getDayOfWeek().getValue() == 1) ||
-                    (searchCriteria.getDepartureDate().getDayOfWeek().getValue() == 5) ||
-                    (searchCriteria.getDepartureDate().getDayOfWeek().getValue() == 7))?
-                    (totalPrice + (getBaseFare() * searchCriteria.getNumberOfPassengers() * 0.4)) : totalPrice;
+        totalPrice = ((departureDate.getDayOfWeek().getValue() == 1) ||
+                    (departureDate.getDayOfWeek().getValue() == 5) ||
+                    (departureDate.getDayOfWeek().getValue() == 7))?
+                    (totalPrice + (getBaseFare() * numberOfPassengers * 0.4)) : totalPrice;
 
         return totalPrice;
     }

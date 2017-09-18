@@ -3,6 +3,7 @@ package airline.Model;
 import sun.jvm.hotspot.opto.HaltNode;
 
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public abstract class TravelClass {
@@ -33,7 +34,7 @@ public abstract class TravelClass {
         return baseFare;
     }
 
-    public double calculateTotalPrice(SearchCriteria searchCriteria){
+    public double calculateTotalPrice(int numberOfPassengers, LocalDate departureDate){
         return getTotalPrice();
     }
 

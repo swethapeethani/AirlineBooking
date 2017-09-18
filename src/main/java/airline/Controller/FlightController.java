@@ -30,15 +30,11 @@ public class FlightController {
         CityRepository cityRepository = new CityRepository();
         List<City> cities = cityRepository.getCities();
         SeatingClass seatingClass[] = SeatingClass.values();
-        LocalDate today = LocalDate.now();
 
         model.addAttribute("cities", cities);
-        model.addAttribute("searchCriteria", new SearchCriteria("Hyderabad", "Pune",1,
-               LocalDate.of(2017, 9, 8),"Economy"));
-        //model.addAttribute("searchCriteria", new SearchCriteria());
+        model.addAttribute("searchCriteria", new SearchCriteria("HYD", "BLR",1,
+               null,"Economy"));
         model.addAttribute("seatingClass", seatingClass);
-        //model.addAttribute("today", today);
-
         return "flightSearch";
 
     }
@@ -57,7 +53,6 @@ public class FlightController {
             }
 
         }
-
             List<FlightView> availableFlights = IFlightSearchService.getFlightsView(searchCriteria);
             model.addAttribute("searchResults", availableFlights);
 

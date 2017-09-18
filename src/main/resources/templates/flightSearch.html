@@ -30,7 +30,7 @@
         <p th:text="'Number of Seats: '"/>
         <input type="number" min="1" th:field="*{numberOfPassengers}"/>
         <p th:text="'Date of Journey '"></p>
-        <input type="date" name="dateString" id="departureDate" th:field="*{dateString}" th:min="${today}"/>
+        <input type="date" name="departureDate" id="departureDate" th:field="*{departureDate}" th:min="${today}"/>
         <p th:text="'Seating Class '"></p>
        <select class="form-control" id="SeatingClass" name="SeatingClass" th:field = "*{SeatingClass}">
            <option th:each="dropDownItem : ${seatingClass}"

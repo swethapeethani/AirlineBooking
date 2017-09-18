@@ -90,11 +90,7 @@ public class Flight {
 
     public boolean isFlightAvailableForDepartureDate(LocalDate departureDate) {
 
-        if ((departureDate == null || departureDate.isBefore(LocalDate.now())) && !getDepartureDate().isBefore(LocalDate.now())) {
-            return true;
-        } else {
-            return (getDepartureDate().equals(departureDate));
-        }
+        return ((departureDate == null) || (getDepartureDate().equals(departureDate)));
     }
 
     public boolean isFlightAvailableForTravelClass(String travelClassName, int numberOfPassengers) {
@@ -103,9 +99,6 @@ public class Flight {
                 .getTravelClassMap()
                 .get(travelClassName)
                 .getAvailableSeats() >= numberOfPassengers;
-
-            //totalPrice = travelClass.getTotalPrice(numberOfPassengers);
-
 
     }
 

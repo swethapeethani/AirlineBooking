@@ -1,19 +1,24 @@
 package airline.Model;
+
+import java.time.LocalDate;
+import java.util.concurrent.TimeUnit.*;
+import java.time.temporal.ChronoUnit;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class First extends TravelClass {
 
     public  First(int totalSeats, int availableSeats,double baseFare, double totalPrice){
         super(totalSeats,availableSeats,baseFare, totalPrice);
     }
 
-    public double calculateTotalPrice(int numberOfPassenger) {
+    public double calculateTotalPrice(int numberOfPassengers, LocalDate departureDate) {
+        long numberOfDaysLeftForBooking = DAYS.between(LocalDate.now(),departureDate);
 
-        int seatsOccupied = getTotalSeats() - getAvailableSeats();
-        double totalPrice = getBaseFare() * numberOfPassenger;
-        /*totalPrice = (seatsOccupied > getTotalSeats() * 0.4 && seatsOccupied < getTotalSeats() * 0.9) ?
-                totalPrice + totalPrice * 0.3 :
-                ((seatsOccupied > getTotalSeats() * 0.9) ? totalPrice + totalPrice * 0.6 : totalPrice);
-        setTotalPrice(totalPrice);*/
-        return totalPrice;
+        if( numberOfDaysLeftForBooking <= 10) {
+          return (getBaseFare() + getBaseFare()*(10 - numberOfDaysLeftForBooking ) * 0.1 )* numberOfPassengers;
+        }
+        return 0;
     }
 
 }

@@ -31,7 +31,7 @@ public class FlightSearchService implements IFlightSearchService {
 
     }
 
-    private Predicate<Flight> isFlightAvailableForDepartureDate( LocalDate departureDate) {
+    private Predicate<Flight> isFlightAvailableForDepartureDate(LocalDate departureDate) {
 
         return x -> x.isFlightAvailableForDepartureDate(departureDate);
 
@@ -42,8 +42,6 @@ public class FlightSearchService implements IFlightSearchService {
         return x -> x.isFlightAvailableForTravelClass(travelClassName, numberOfPassengers);
 
     }
-
-    //private void calculateTotalTicketPriceForEconomy()
 
     @Override
     public List<Flight> search(SearchCriteria searchCriteria) {
@@ -70,7 +68,7 @@ public class FlightSearchService implements IFlightSearchService {
             flightView.setDestination(flight.getDestination());
             flightView.setDepartureDate(flight.getDepartureDate().toString());
             TravelClass travelClass = flight.getAirplane().getTravelClassMap().get(searchCriteria.getSeatingClass());
-            flightView.setTotalPrice(travelClass.calculateTotalPrice(searchCriteria));
+            flightView.setTotalPrice(travelClass.calculateTotalPrice(searchCriteria.getNumberOfPassengers(),flight.getDepartureDate()));
             flightViewList.add(flightView);
         }
         return flightViewList;

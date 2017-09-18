@@ -10,8 +10,8 @@ public class SearchCriteria {
     private String source;
     private String destination;
     private int numberOfPassengers;
-    private String dateString;
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    //private String dateString;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
     private String SeatingClass;
 
@@ -20,10 +20,11 @@ public class SearchCriteria {
     }
 
 
-    public SearchCriteria(String source, String destination, int numberOfPassengers, LocalDate departureDate, String SeatingClass){
+    public SearchCriteria(String source, String destination, int numberOfPassengers,LocalDate departureDate, String SeatingClass){
         this.source = source;
         this.destination = destination;
         this.numberOfPassengers = numberOfPassengers;
+        //this.dateString = dateString;
         this.departureDate = departureDate;
         this.SeatingClass = SeatingClass;
     }
@@ -69,18 +70,16 @@ public class SearchCriteria {
     }
 
 
-    public String getDateString() {
-
-        if(dateString == null || dateString.isEmpty()) {
-            //this.departureDate = LocalDate.now();
-            dateString = LocalDate.now().toString();
-        }
-        return dateString;
-    }
-
-    public void setDateString(String dateString){
-        this.dateString =dateString;
-    }
+//    public String getDateString() {
+//        /*if(!departureDate.equals(null)) {
+//            dateString = departureDate.toString();
+//        }*/
+//        return departureDate.toString();
+//    }
+//
+//    public void setDateString(String dateString){
+//        this.departureDate =  LocalDate.parse(dateString);
+//    }
 
     public void setDepartureDate(LocalDate departureDate){
         this.departureDate = departureDate;
@@ -88,7 +87,8 @@ public class SearchCriteria {
 
     public LocalDate getDepartureDate()
     {
-        return LocalDate.parse(this.dateString);
+        //return (((dateString == null) || (dateString.isEmpty()))? null : LocalDate.parse(this.dateString));
+        return departureDate;
     }
 
 
