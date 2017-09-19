@@ -1,4 +1,8 @@
+import airline.Model.City;
+import airline.Model.Economy;
+import airline.Model.First;
 import airline.Model.SearchCriteria;
+import airline.Repository.CityRepository;
 import airline.Repository.FlightRepository;
 import airline.Services.FlightSearchService;
 import java.time.LocalDate;
@@ -60,16 +64,42 @@ public class SearchServiceTest{
     }
     @Test
     public void showFlightHYDtoBLRon25SepWithSeatingClassAsNull(){
-        //IFlightSearchService searchService = new FlightSearchService();
         SearchCriteria searchCriteria = new SearchCriteria("HYD", "BLR", 3, LocalDate.of(2017,9,25), null);
         assertEquals(searchService.search(searchCriteria).size(),1);
     }
     //If number of passengers is 0, take default value as 1
     @Test
     public void showFlightFromHYDtoBLRfor0PassengersOn25th() {
-        //IFlightSearchService searchService = new FlightSearchService();
         SearchCriteria searchCriteria = new SearchCriteria("HYD", "BLR", 0, LocalDate.of(2017, 9, 25), "Economy");
         assertEquals(searchService.search(searchCriteria).size(), 1);
+    }
+
+    @Test
+    public void showHYDToBLRTotalPriceFor1PassengerInFirstClass5DaysBeforeDepartureDate() {
+        First first =new First(10,5,10000,0.0);
+        first.calculateTotalPrice(1,LocalDate.of(2017,9,25));
+        assertEquals(first.getTotalPrice(),0.0,15000.0);
+    }
+
+    @Test
+    public void showHYDToBLRTotalPriceFor5PassengerInEconomyClassWith90PercentSeatAvailable() {
+        Economy economy =new Economy(100,90,6000,0.0);
+        economy.calculateTotalPrice(5,LocalDate.of(2017,9,25));
+        assertEquals(economy.getTotalPrice(),0.0,30000.0);
+    }
+
+    @Test
+    public void showHYDToBLRTotalPriceFor1PassengerInBusinessClassOnMonday() {
+        First first =new First(10,5,12000,0.0);
+        first.calculateTotalPrice(1,LocalDate.of(2017,9,25));
+        assertEquals(first.getTotalPrice(),0.0,16800.0);
+    }
+
+    @Test
+    public void showCities(){
+        CityRepository cityRepository = new CityRepository();
+        cityRepository.getCities();
+        assertEquals(cityRepository.getCities().size(), 4);
     }
 
 }
